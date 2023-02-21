@@ -30,17 +30,18 @@ class SecondPage : AppCompatActivity() {
         tvFirstName!!.text = finalIntent.getStringExtra("firstName")
         tvLastName!!.text = finalIntent.getStringExtra("LastName")
 
-        val imagePath = finalIntent.getStringExtra("IMG_PATH")
-        val thumbnailImage = BitmapFactory.decodeFile(imagePath)
-        if (thumbnailImage != null) {
-            imgThumbnail!!.setImageBitmap(thumbnailImage)
-        }
 
-        // Set Edit Button Event
+
         val btnEdit = findViewById<Button>(R.id.btn_Restart)
         btnEdit.setOnClickListener {
             val main = Intent(this, MainActivity::class.java)
             startActivity(main)
+        }
+
+        val imagePath = finalIntent.getStringExtra("IMG_PATH")
+        val thumbnailImage = BitmapFactory.decodeFile(imagePath)
+        if (thumbnailImage != null) {
+            imgThumbnail!!.setImageBitmap(thumbnailImage)
         }
     }
 

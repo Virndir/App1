@@ -27,9 +27,7 @@ class MainActivity : AppCompatActivity() {
 
    // private lateinit var binding: ActivityMainBinding
 
-    private var firstName: String? = null
-    private var middleName: String? = null
-    private var lastName: String? = null
+
 
 
     private var tv_FirstName: TextView? = null
@@ -38,7 +36,9 @@ class MainActivity : AppCompatActivity() {
     private var et_FirstName: EditText? = null
     private var et_MiddleName: EditText? = null
     private var et_LastName: EditText? = null
-
+    private var firstName: String? = null
+    private var middleName: String? = null
+    private var lastName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,13 +70,11 @@ class MainActivity : AppCompatActivity() {
             et_LastName = findViewById<EditText>(R.id.et_LastName)
             lastName = et_LastName!!.text.toString()
 
-            if (firstName.isNullOrBlank()) {
-                Toast.makeText(this, "Invalid or Blank First Name, please fix!", Toast.LENGTH_SHORT).show()
-            } else if (lastName.isNullOrBlank()) {
-                Toast.makeText(this, "Invalid or Blank Last Name, please fix!", Toast.LENGTH_SHORT).show()
+            if (firstName.isNullOrBlank() || lastName.isNullOrBlank()) {
+                Toast.makeText(this, "Invalid or Blank First/Last Name, please fix!", Toast.LENGTH_SHORT).show()
             } else {
-                if ((!lastName.isNullOrBlank())){
-                    displayIntent!!.putExtra("LastName", middleName)
+                if ((!middleName.isNullOrBlank())){
+                    displayIntent!!.putExtra("MiddleName", middleName)
                 }
                 displayIntent!!.putExtra("firstName", firstName)
                 displayIntent!!.putExtra("LastName", lastName)
@@ -155,10 +153,8 @@ class MainActivity : AppCompatActivity() {
     private fun writeImage(finalBitmap: Bitmap?): String {
         val directory = File("${getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/saved_images")
         directory.mkdirs()
-
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val fileName = "Thumbnail_$timeStamp.jpg"
-
         val file = File(directory, fileName)
         if (file.exists()) file.delete()
         try {
